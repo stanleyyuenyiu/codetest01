@@ -4,30 +4,13 @@ A CSV Upload API Service, without jwt auth, without worker, with unit test
 
 It use default hapi streaming upload with async process to insert data into mongo db
 
-If there is enough time, the architecture should be using aws api-gateway, and aws cognito id pool for authenication, and connect to lambda for the api, and using sqs for worker, final, should send success or fail report to user by SES
+# The ideal architecture 
 
-## Requirements
+It should be upload file to S3 to avoid IO issue due to big files
 
- - [Node.js](http://nodejs.org/download/) `>=12.x` 
- - [MongoDB](http://www.mongodb.org/downloads) `>=2.6` 
+It should fire and forget and then use S3 to trgger event in sqs
 
-
-
-## Install dependencies
-
-```bash
-$ yarn install
-
-# > node server.js
-
-```
-
-## Running the app
-
-```bash
-$ yarn dev
-
-```
+It shoudl use sqs as worker and complete the process 
 
 ## Running the app with docker
 
